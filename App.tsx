@@ -18,6 +18,9 @@ import {
   Poppins_800ExtraBold,
   Poppins_900Black,
 } from "@expo-google-fonts/poppins";
+import { NavigationContainer } from "@react-navigation/native";
+import { BottomTabNavigation } from "@navigation/BottomTab.navigation";
+
 export default function App() {
   let persistor = persistStore(store);
 
@@ -33,12 +36,17 @@ export default function App() {
     Poppins_800ExtraBold,
     Poppins_900Black,
   });
+
+  if (!loaded) {
+    return <PersistGateLoader />;
+  }
   return (
     <Provider store={store}>
-      <PersistGate
-        persistor={persistor}
-        loading={<PersistGateLoader />}
-      ></PersistGate>
+      <PersistGate persistor={persistor} loading={<PersistGateLoader />}>
+        <NavigationContainer>
+          <BottomTabNavigation />
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 }

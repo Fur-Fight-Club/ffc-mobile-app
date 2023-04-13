@@ -9,3 +9,5 @@ export enum Fonts {
   EXTRA_BOLD = "Poppins_800ExtraBold",
   BLACK = "Poppins_900Black",
 }
+
+export type FontsType = keyof typeof Fonts;
