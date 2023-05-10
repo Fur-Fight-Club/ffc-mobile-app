@@ -16,7 +16,6 @@ import {
 import { combineReducers } from "redux";
 import { applicationApi } from "./application/slice";
 
-
 const combinedReducers = combineReducers({
   ...reducers,
 });
@@ -30,7 +29,7 @@ export const rtkQueryErrorLogger: Middleware =
   (api: MiddlewareAPI) => (next) => (action) => {
     // RTK Query uses `createAsyncThunk` from redux-toolkit under the hood, so we're able to utilize these matchers!
     if (isRejectedWithValue(action)) {
-      console.warn("We got a rejected action!", action);
+      console.warn("We got a rejected action!", action.error);
     } else {
       //console.log(action);
     }
@@ -45,10 +44,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(
-      rtkQueryErrorLogger,
-      applicationApi.middleware,
-    ),
+    }).concat(rtkQueryErrorLogger, applicationApi.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;
