@@ -62,6 +62,18 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = ({}) => {
               onPress={() => nav.navigate(NotConnectedRoutes.REGISTER)}
               hyperlink
             />
+            <Spacer size={hp("1.5%")} />
+            <Button
+              label={"Mot de passe oublié ?"}
+              size={Button.sizes.large}
+              backgroundColor={Colors.red30}
+              labelStyle={{
+                color: Colors.red30,
+              }}
+              // @ts-ignore
+              onPress={() => nav.navigate(NotConnectedRoutes.FORGOT_PASSWORD)}
+              hyperlink
+            />
           </Card>
         </View>
       </ScrollView>
@@ -85,7 +97,7 @@ const styles = StyleSheet.create({
     height: hp("100%"),
   },
   card: {
-    height: hp("50%"),
+    height: hp("52%"),
     width: wp("80%"),
   },
   textTitle: {
