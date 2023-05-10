@@ -5,6 +5,7 @@ import { LoginScreen } from "@screens/Enrollment/Login.screen";
 import { RegisterScreen } from "@screens/Enrollment/Register.screen";
 import { NotConnectedRoutes } from "./navigation.model";
 import { EmailConfirmationScreen } from "@screens/Enrollment/EmailConfirmation.screen";
+import { ForgotPasswordScreen } from "@screens/Enrollment/ForgotPassword.screen";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,13 @@ export const NotConnectedNavigation: React.FunctionComponent<
       <Stack.Screen
         name={NotConnectedRoutes.EMAIL_CONFIRMATION}
         component={EmailConfirmationScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={NotConnectedRoutes.FORGOT_PASSWORD}
+        component={ForgotPasswordScreen}
         options={{
           headerShown: false,
         }}

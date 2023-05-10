@@ -22,4 +22,5 @@ export const CACHE_KEY = "App";
 export const endpoint = {
   login: "user/login",
   register: "user/register",
+  askResetPassword: "account/ask-reset-password",
 };

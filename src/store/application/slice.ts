@@ -12,6 +12,7 @@ import { GenericApiError } from "@store/store.model";
 import { loginErrorsHandler } from "./errors/login.error";
 import Toast from "react-native-toast-message";
 import { registerErrorsHandler } from "./errors/register.error";
+import { askResetPasswordErrorsHandler } from "./errors/ask-reset.error";
 
 export const applicationApi = createApi({
   reducerPath,
@@ -77,6 +78,31 @@ export const applicationApi = createApi({
         }
       },
     }),
+
+    // Ask reset password
+    askResetPassword: builder.mutation<void, string>({
+      query: (email) => ({
+        url: `${endpoint.askResetPassword}`,
+        method: "POST",
+        body: { email },
+      }),
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        dispatch(setLoading(true));
+        try {
+          await queryFulfilled;
+          dispatch(setLoading(false));
+          Toast.show({
+            type: "success",
+            text1: "📨 Mail envoyé !",
+            text2: "Vérifiez votre boîte mail !",
+          });
+        } catch (err) {
+          const error = err as GenericApiError;
+          dispatch(setLoading(false));
+          askResetPasswordErrorsHandler(error);
+        }
+      },
+    }),
   }),
 });
 
@@ -102,5 +128,9 @@ export const applicationSlice = createSlice({
 export const { setUser, setLoading, setNotificationToken, setToken } =
   applicationSlice.actions;
 
-export const { useLoginMutation, useRegisterMutation, useTestQuery } =
-  applicationApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useAskResetPasswordMutation,
+  useTestQuery,
+} = applicationApi;
