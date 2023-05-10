@@ -24,11 +24,11 @@ export const EmailConfirmationScreen: React.FunctionComponent<
       >
         <View style={styles.card}>
           <Card flex center>
-            <Text style={styles.textTitle}>Bravo !</Text>
+            <Text style={styles.textTitle}>Et voilà !</Text>
             <Spacer size={hp("5%")} />
             <Text style={styles.text}>
-              Votre compte a bien été créé. Vous allez recevoir un email de
-              confirmation.
+              Nous vous avons envoyé un mail à la suite de votre demande ! Il ne
+              vous reste plus qu'à vérifier votre boîte mail !
             </Text>
             <Spacer size={hp("2%")} />
             <Button
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     height: hp("100%"),
   },
   card: {
-    height: hp("30%"),
+    height: hp("34%"),
     width: wp("80%"),
   },
   textTitle: {
