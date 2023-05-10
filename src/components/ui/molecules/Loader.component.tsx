@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, StyleSheet, View } from "react-native";
 import Lottie from "lottie-react-native";
-import { hp, iphoneX } from "@utils/responsive.utils";
+import { hp, iphoneX, wp } from "@utils/responsive.utils";
 
 interface LoaderProps {
   loading: boolean;
@@ -13,12 +13,13 @@ export const Loader: React.FunctionComponent<LoaderProps> = ({ loading }) => {
     animation.current?.play();
   }, []);
   return (
-    <View style={[styles.container, { display: loading ? "flex" : "none" }]}>
+    <View style={[styles.container, { display: loading ? undefined : "none" }]}>
       <Lottie
         source={require("../../../assets/anims/fire.json")}
         autoPlay
         ref={animation}
         loop
+        style={{ width: wp("5%"), height: hp("5%"), zIndex: 999 }}
       />
     </View>
   );
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
     top: iphoneX.check ? iphoneX.topHeight() : 0,
     alignItems: "center",
     justifyContent: "center",
-    width: hp("7%"),
+    width: wp("100%"),
     height: hp("7%"),
   },
 });
