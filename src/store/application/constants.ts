@@ -3,17 +3,23 @@ import { App } from "./application.model";
 export const initialState: App = {
   user: {
     id: -1,
-    token: null,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    deletedAt: null,
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    role: "USER",
+    email_token: "",
   },
   loading: false,
   notification_token: "",
+  token: "",
 };
 
 export const reducerPath = "applicationApi";
 
 export const CACHE_KEY = "App";
 
-export const endpoint = {};
+export const endpoint = {
+  login: "user/login",
+  register: "user/register",
+};

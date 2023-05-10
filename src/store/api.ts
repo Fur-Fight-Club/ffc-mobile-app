@@ -13,7 +13,7 @@ export const baseQuery = fetchBaseQuery({
 
     // If we have a token set in state, let's assume that we should be passing it.
     if (app) {
-      headers.set("Authorization", `Bearer ${app.user.token}` ?? "");
+      headers.set("Authorization", `Bearer ${app.token}` ?? "");
     }
     headers.set("Content-Type", "application/json");
     return headers;
