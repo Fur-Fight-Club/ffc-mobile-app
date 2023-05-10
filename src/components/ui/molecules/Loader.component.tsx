@@ -8,16 +8,11 @@ interface LoaderProps {
 }
 
 export const Loader: React.FunctionComponent<LoaderProps> = ({ loading }) => {
-  const animation = React.useRef(null);
-  React.useEffect(() => {
-    animation.current?.play();
-  }, []);
   return (
     <View style={[styles.container, { display: loading ? undefined : "none" }]}>
       <Lottie
         source={require("../../../assets/anims/fire.json")}
         autoPlay
-        ref={animation}
         loop
         style={{ width: wp("5%"), height: hp("5%"), zIndex: 999 }}
       />
