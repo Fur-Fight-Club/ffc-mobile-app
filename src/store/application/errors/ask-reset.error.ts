@@ -7,8 +7,6 @@ export enum AskResetPasswordErrors {
 }
 
 export const askResetPasswordErrorsHandler = (error: GenericApiError) => {
-  console.log(error.error.data.message);
-
   switch (error.error.data.message) {
     case AskResetPasswordErrors.VALIDATION:
       Toast.show({
