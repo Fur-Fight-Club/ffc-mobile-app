@@ -19,7 +19,8 @@ import {
   Poppins_900Black,
 } from "@expo-google-fonts/poppins";
 import { NavigationContainer } from "@react-navigation/native";
-import { BottomTabNavigation } from "@navigation/BottomTab.navigation";
+import { MainNavigation } from "@navigation/Main.navigation";
+import Toast from "react-native-toast-message";
 
 export default function App() {
   let persistor = persistStore(store);
@@ -44,7 +45,8 @@ export default function App() {
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={<PersistGateLoader />}>
         <NavigationContainer>
-          <BottomTabNavigation />
+          <MainNavigation />
+          <Toast />
         </NavigationContainer>
       </PersistGate>
     </Provider>

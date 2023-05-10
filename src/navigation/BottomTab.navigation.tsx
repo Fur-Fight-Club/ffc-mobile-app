@@ -6,6 +6,7 @@ import { TestScreen } from "@screens/Test.screen";
 import { hp, wp } from "@utils/responsive.utils";
 import { TabBarIcon } from "@components/ui/molecules/TabBarIcon.component";
 import FeatherIcon from "@expo/vector-icons/Feather";
+import { BottomTabRoutes } from "./navigation.model";
 
 interface BottomTabNavigationProps {}
 
@@ -22,9 +23,10 @@ export const BottomTabNavigation: React.FunctionComponent<
         tabBarShowLabel: false,
         tabBarStyle: tabStyle.tabBarStyle,
       }}
+      initialRouteName={BottomTabRoutes.HOME}
     >
       <Tab.Screen
-        name="Test1"
+        name={BottomTabRoutes.PROFILE}
         component={TemplateScreen}
         options={{
           tabBarIcon: ({ focused }) => (
@@ -33,7 +35,7 @@ export const BottomTabNavigation: React.FunctionComponent<
         }}
       />
       <Tab.Screen
-        name="Template"
+        name={BottomTabRoutes.HOME}
         component={TestScreen}
         options={{
           tabBarIcon: ({ focused }) => (
@@ -42,7 +44,7 @@ export const BottomTabNavigation: React.FunctionComponent<
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name={BottomTabRoutes.SETTINGS}
         component={TemplateScreen}
         options={{
           tabBarIcon: ({ focused }) => (
