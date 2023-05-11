@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     height: hp("100%"),
   },
   card: {
-    height: Platform.OS === "ios" ? hp("70%") : hp("%"),
+    height: Platform.OS === "ios" ? hp("70%") : hp("80%"),
     width: wp("80%"),
   },
   textTitle: {
