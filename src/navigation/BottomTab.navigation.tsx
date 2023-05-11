@@ -1,12 +1,13 @@
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TemplateScreen } from "@screens/Template.screen";
 import { TestScreen } from "@screens/Test.screen";
 import { hp, wp } from "@utils/responsive.utils";
 import { TabBarIcon } from "@components/ui/molecules/TabBarIcon.component";
-import FeatherIcon from "@expo/vector-icons/Feather";
 import { BottomTabRoutes } from "./navigation.model";
+import { useGetUserQuery } from "@store/application/slice";
+import { useEffect } from "react";
 
 interface BottomTabNavigationProps {}
 
@@ -14,6 +15,12 @@ export const BottomTabNavigation: React.FunctionComponent<
   BottomTabNavigationProps
 > = ({}) => {
   const Tab = createBottomTabNavigator();
+
+  const { refetch } = useGetUserQuery();
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <Tab.Navigator

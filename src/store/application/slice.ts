@@ -19,14 +19,6 @@ export const applicationApi = createApi({
   baseQuery,
   tagTypes: [CACHE_KEY],
   endpoints: (builder) => ({
-    test: builder.query<string, string>({
-      query: (user) => ({
-        url: `${"test"}`,
-        method: "POST",
-        body: user,
-      }),
-    }),
-
     // Login
     login: builder.mutation<LoginResponse, LoginRequest>({
       query: (user) => ({
@@ -103,6 +95,30 @@ export const applicationApi = createApi({
         }
       },
     }),
+
+    // User's informations route
+    getUser: builder.query<User, void>({
+      query: () => ({
+        url: `${endpoint.me}`,
+        method: "GET",
+      }),
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        dispatch(setLoading(true));
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setLoading(false));
+          dispatch(setUser(data));
+        } catch (err) {
+          const error = err as GenericApiError;
+          dispatch(setLoading(false));
+          Toast.show({
+            type: "error",
+            text1: "🚨 Erreur !",
+            text2: "Une erreur est survenue, veuillez réessayer",
+          });
+        }
+      },
+    }),
   }),
 });
 
@@ -132,5 +148,5 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useAskResetPasswordMutation,
-  useTestQuery,
+  useGetUserQuery,
 } = applicationApi;

@@ -23,4 +23,5 @@ export const endpoint = {
   login: "user/login",
   register: "user/register",
   askResetPassword: "account/ask-reset-password",
+  me: "user/me",
 };
