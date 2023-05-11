@@ -7,6 +7,7 @@ import { hp, wp } from "@utils/responsive.utils";
 import { useState } from "react";
 import {
   KeyboardAvoidingView,
+  Platform,
   ScrollView,
   StyleSheet,
   View,
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
     height: hp("100%"),
   },
   card: {
-    height: hp("52%"),
+    height: Platform.OS === "ios" ? hp("52%") : hp("60%"),
     width: wp("80%"),
   },
   textTitle: {

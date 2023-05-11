@@ -15,6 +15,7 @@ import {
   View,
 } from "react-native";
 import { Button, Card, Colors, Text } from "react-native-ui-lib";
+import { BackArrow } from "@components/ui/atoms/BackArrow.component";
 
 interface ForgotPasswordScreenProps {}
 
@@ -36,6 +37,7 @@ export const ForgotPasswordScreen: React.FunctionComponent<
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <BackArrow onPress={() => nav.goBack()} />
       <ScrollView
         style={styles.scrollview}
         contentContainerStyle={styles.scrollviewContainer}
@@ -84,6 +86,7 @@ const styles = StyleSheet.create({
     width: wp("80%"),
   },
   textTitle: {
+    paddingHorizontal: wp("2.5%"),
     fontFamily: "Poppins_900Black",
     fontSize: hp("4%"),
     textTransform: "uppercase",

@@ -1,3 +1,4 @@
+import { BackArrow } from "@components/ui/atoms/BackArrow.component";
 import { Input } from "@components/ui/atoms/Input.component";
 import { Spacer } from "@components/ui/atoms/Spacer.component";
 import { NotConnectedRoutes } from "@navigation/navigation.model";
@@ -7,6 +8,7 @@ import { hp, wp } from "@utils/responsive.utils";
 import { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
+  Platform,
   ScrollView,
   StyleSheet,
   View,
@@ -76,6 +78,7 @@ export const RegisterScreen: React.FunctionComponent<
   }, [registerMutation.isSuccess]);
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <BackArrow onPress={() => nav.goBack()} />
       <ScrollView
         style={styles.scrollview}
         contentContainerStyle={styles.scrollviewContainer}
@@ -150,7 +153,7 @@ const styles = StyleSheet.create({
     height: hp("100%"),
   },
   card: {
-    height: hp("70%"),
+    height: Platform.OS === "ios" ? hp("70%") : hp("%"),
     width: wp("80%"),
   },
   textTitle: {
