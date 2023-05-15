@@ -8,6 +8,8 @@ import { TabBarIcon } from "@components/ui/molecules/TabBarIcon.component";
 import { BottomTabRoutes } from "./navigation.model";
 import { useGetUserQuery } from "@store/application/slice";
 import { useEffect } from "react";
+import { SettingsScreen } from "@screens/Settings/Setttings.screen";
+import { SettingsNavigation } from "./Settings.navigation";
 
 interface BottomTabNavigationProps {}
 
@@ -28,7 +30,7 @@ export const BottomTabNavigation: React.FunctionComponent<
         tabBarHideOnKeyboard: true,
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: tabStyle.tabBarStyle,
+        tabBarStyle: tabStyle.menuSettings,
       }}
       initialRouteName={BottomTabRoutes.HOME}
     >
@@ -52,7 +54,7 @@ export const BottomTabNavigation: React.FunctionComponent<
       />
       <Tab.Screen
         name={BottomTabRoutes.SETTINGS}
-        component={TemplateScreen}
+        component={SettingsNavigation}
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} icon="settings" />
@@ -64,7 +66,7 @@ export const BottomTabNavigation: React.FunctionComponent<
 };
 
 const tabStyle = StyleSheet.create({
-  tabBarStyle: {
+  menuSettings: {
     position: "absolute",
     bottom: 0,
     left: hp("2.5%"),

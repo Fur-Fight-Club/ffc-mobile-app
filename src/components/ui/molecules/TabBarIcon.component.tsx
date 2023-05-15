@@ -4,6 +4,7 @@ import FeatherIcon from "@expo/vector-icons/Feather";
 import { Colors } from "react-native-ui-lib";
 import { hp } from "@utils/responsive.utils";
 import { FeatherIconsType } from "@utils/icons.utils";
+import { Platform } from "react-native";
 
 interface TabBarIconProps {
   focused: boolean;
@@ -31,6 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
-    bottom: -hp("7%") / 2,
+    bottom: Platform.OS === "ios" ? -hp("7%") / 2 : -hp("3%") / 2,
   },
 });

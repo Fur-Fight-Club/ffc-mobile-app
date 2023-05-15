@@ -5,6 +5,7 @@ import { baseQuery } from "@store/api";
 import {
   LoginRequest,
   LoginResponse,
+  MeResponse,
   RegisterRequest,
   User,
 } from "./application.model";
@@ -97,7 +98,7 @@ export const applicationApi = createApi({
     }),
 
     // User's informations route
-    getUser: builder.query<User, void>({
+    getUser: builder.query<MeResponse, void>({
       query: () => ({
         url: `${endpoint.me}`,
         method: "GET",
@@ -107,7 +108,7 @@ export const applicationApi = createApi({
         try {
           const { data } = await queryFulfilled;
           dispatch(setLoading(false));
-          dispatch(setUser(data));
+          dispatch(setUserInformation(data));
         } catch (err) {
           const error = err as GenericApiError;
           dispatch(setLoading(false));
@@ -138,11 +139,27 @@ export const applicationSlice = createSlice({
     setToken(state, action: PayloadAction<string>) {
       state.token = action.payload;
     },
+    setUserInformation: (state, action: PayloadAction<MeResponse>) => {
+      state.user = {
+        ...action.payload.user,
+        Invoice: action.payload.invoices,
+        MatchMessage: [],
+        Monster: [],
+        StripeAccount: action.payload.stripeAccount,
+        Wallet: action.payload.wallet[0],
+        transaction: action.payload.transaction,
+      };
+    },
   },
 });
 
-export const { setUser, setLoading, setNotificationToken, setToken } =
-  applicationSlice.actions;
+export const {
+  setUser,
+  setLoading,
+  setNotificationToken,
+  setToken,
+  setUserInformation,
+} = applicationSlice.actions;
 
 export const {
   useLoginMutation,
