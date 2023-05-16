@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SettingsRoutes } from "./navigation.model";
 import { EmailConfirmationScreen } from "@screens/Enrollment/EmailConfirmation.screen";
-import { SettingsScreen } from "@screens/Settings/Setttings.screen";
+import { SetttingsMenuScreen } from "@screens/Settings/SetttingsMenu.screen";
 import { WalletScreen } from "@screens/Settings/Wallet.screen";
 import { ProfilScreen } from "@screens/Settings/Profil.screen";
 import { PasswordScreen } from "@screens/Settings/Password.screen";
@@ -17,23 +17,23 @@ export const SettingsNavigation: React.FunctionComponent<
   SettingsNavigationProps
 > = ({}) => {
   return (
-    <Stack.Navigator initialRouteName={SettingsRoutes.SETTINGS}>
+    <Stack.Navigator initialRouteName={SettingsRoutes.MENU}>
       <Stack.Screen
-        name={SettingsRoutes.SETTINGS}
-        component={SettingsScreen}
+        name={SettingsRoutes.MENU}
+        component={SetttingsMenuScreen}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name={SettingsRoutes.SETTINGS_PROFIL}
+        name={SettingsRoutes.PROFIL}
         component={ProfilScreen}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name={SettingsRoutes.SETTINGS_PASSWORD}
+        name={SettingsRoutes.PASSWORD}
         component={PasswordScreen}
         options={{
           headerShown: false,
@@ -47,7 +47,7 @@ export const SettingsNavigation: React.FunctionComponent<
         }}
       />
       <Stack.Screen
-        name={SettingsRoutes.SETTINGS_NOTIFICATIONS}
+        name={SettingsRoutes.NOTIFICATIONS}
         component={NotificationScreen}
         options={{
           headerShown: false,

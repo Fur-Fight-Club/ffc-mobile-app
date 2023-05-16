@@ -10,10 +10,10 @@ import { useNavigation } from "@react-navigation/native";
 import { setToken } from "@store/application/slice";
 import { MenuList } from "@components/ui/molecules/MenuList.component";
 
-interface SettingsScreenProps {}
+interface SetttingsMenuScreenProps {}
 
-export const SettingsScreen: React.FunctionComponent<
-  SettingsScreenProps
+export const SetttingsMenuScreen: React.FunctionComponent<
+  SetttingsMenuScreenProps
 > = ({}) => {
   const dispatch = useDispatch();
   const nav = useNavigation();
@@ -31,12 +31,12 @@ export const SettingsScreen: React.FunctionComponent<
         <MenuList
           children="Modifier mon profil"
           // @ts-ignore
-          onPress={() => nav.navigate(SettingsRoutes.SETTINGS_PROFIL)}
+          onPress={() => nav.navigate(SettingsRoutes.PROFIL)}
         />
         <MenuList
           children="Modifier mon mot de passe"
           // @ts-ignore
-          onPress={() => nav.navigate(SettingsRoutes.SETTINGS_PASSWORD)}
+          onPress={() => nav.navigate(SettingsRoutes.PASSWORD)}
         />
         <MenuList
           children="Voir mon wallet"
@@ -46,7 +46,7 @@ export const SettingsScreen: React.FunctionComponent<
         <MenuList
           children="Paramètres de notifications"
           // @ts-ignore
-          onPress={() => nav.navigate(SettingsRoutes.SETTINGS_NOTIFICATIONS)}
+          onPress={() => nav.navigate(SettingsRoutes.NOTIFICATIONS)}
         />
         <MenuList
           children="Déconnexion"

@@ -8,7 +8,6 @@ import { TabBarIcon } from "@components/ui/molecules/TabBarIcon.component";
 import { BottomTabRoutes } from "./navigation.model";
 import { useGetUserQuery } from "@store/application/slice";
 import { useEffect } from "react";
-import { SettingsScreen } from "@screens/Settings/Setttings.screen";
 import { SettingsNavigation } from "./Settings.navigation";
 
 interface BottomTabNavigationProps {}

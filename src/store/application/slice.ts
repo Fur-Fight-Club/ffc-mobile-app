@@ -120,6 +120,30 @@ export const applicationApi = createApi({
         }
       },
     }),
+
+    // update user
+    UpdateUser: builder.query<MeResponse, void>({
+      query: () => ({
+        url: `${endpoint.me}`,
+        method: "GET",
+      }),
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        dispatch(setLoading(true));
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setLoading(false));
+          dispatch(setUserInformation(data));
+        } catch (err) {
+          const error = err as GenericApiError;
+          dispatch(setLoading(false));
+          Toast.show({
+            type: "error",
+            text1: "🚨 Erreur !",
+            text2: "Une erreur est survenue, veuillez réessayer",
+          });
+        }
+      },
+    }),
   }),
 });
 
