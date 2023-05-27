@@ -113,10 +113,14 @@ export const applicationApi = createApi({
         dispatch(setLoading(true));
         try {
           const { data } = await queryFulfilled;
+          console.log({ data });
+
           dispatch(setLoading(false));
           dispatch(setUserInformation(data));
         } catch (err) {
           const error = err as GenericApiError;
+          console.log(error.error.data);
+
           dispatch(setLoading(false));
           Toast.show({
             type: "error",

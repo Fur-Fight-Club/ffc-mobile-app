@@ -8,9 +8,9 @@ import { NotConnectedNavigation } from "./NotConnected.navigation";
 import { useUpsertNotificationTokenMutation } from "@store/application/slice";
 import messaging from "@react-native-firebase/messaging";
 import { useEffect, useRef, useState } from "react";
-
-import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
+import * as Linking from "expo-linking";
+import { event } from "react-native-reanimated";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -31,6 +31,12 @@ export const MainNavigation: React.FunctionComponent<
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
+
+  const url = Linking.useURL();
+
+  useEffect(() => {
+    console.log({ url });
+  }, [url]);
 
   useEffect(() => {
     console.log("notification_token", notification_token);
@@ -72,6 +78,14 @@ export const MainNavigation: React.FunctionComponent<
       Notifications.addNotificationResponseReceivedListener((response) => {
         console.log(response);
       });
+
+    /**
+     * DEEPLINKING
+     */
+    Linking.addEventListener("url", (event) => {
+      const data = Linking.parse(event.url);
+      console.log("deeplinking data => ", data);
+    });
 
     return () => {
       Notifications.removeNotificationSubscription(
