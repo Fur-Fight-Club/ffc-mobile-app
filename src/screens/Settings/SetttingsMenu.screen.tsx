@@ -7,7 +7,10 @@ import { getStatusBarHeight, isIphoneX } from "react-native-iphone-x-helper";
 import { Colors } from "react-native-ui-lib";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { setToken } from "@store/application/slice";
+import {
+  setToken,
+  useDeleteNotificationTokenMutation,
+} from "@store/application/slice";
 import { MenuList } from "@components/ui/molecules/MenuList.component";
 
 interface SetttingsMenuScreenProps {}
@@ -17,7 +20,8 @@ export const SetttingsMenuScreen: React.FunctionComponent<
 > = ({}) => {
   const dispatch = useDispatch();
   const nav = useNavigation();
-  const { user } = useSelector(applicationState);
+  const { user, notification_token } = useSelector(applicationState);
+  const [deleteNotificationToken] = useDeleteNotificationTokenMutation();
 
   return (
     <View style={styles.container}>
@@ -52,7 +56,10 @@ export const SetttingsMenuScreen: React.FunctionComponent<
           children="Déconnexion"
           color="red"
           // @ts-ignore
-          onPress={() => dispatch(setToken(""))}
+          onPress={() => {
+            deleteNotificationToken({ token: notification_token });
+            dispatch(setToken(""));
+          }}
         />
       </View>
     </View>

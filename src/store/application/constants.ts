@@ -14,9 +14,11 @@ export const initialState: App = {
     MatchMessage: [],
     Monster: [],
     StripeAccount: [],
+    Wallet: null,
+    transaction: [],
   },
   loading: false,
-  notification_token: "",
+  notification_token: null,
   token: "",
 };
 
