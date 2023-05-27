@@ -1,4 +1,10 @@
-import { Invoice, StripeAccount } from "@store/payments/payments.model";
+import {
+  Invoice,
+  StripeAccount,
+  StripePayments,
+  Transaction,
+  Wallet,
+} from "@store/payments/payments.model";
 import { MatchMessage } from "@store/notifications/notifications.model";
 import { Monster } from "@store/monsters/monsters.model";
 import { NotificationSettings } from "ffc-prisma-package/dist/client";
@@ -10,7 +16,16 @@ export interface App {
   token: string;
 }
 
-export interface User {
+export interface User extends BasicUser {
+  Invoice: Invoice[];
+  MatchMessage: MatchMessage[];
+  Monster: Monster[];
+  StripeAccount: StripeAccount[];
+  Wallet: Wallet;
+  transaction: Transaction[];
+}
+
+export interface BasicUser {
   id: number;
   firstname: string;
   lastname: string;
@@ -19,10 +34,6 @@ export interface User {
   role: "ADMIN" | "USER" | "MONSTER_OWNER";
   email_token: string;
   is_email_verified: boolean;
-  Invoice: Invoice[];
-  MatchMessage: MatchMessage[];
-  Monster: Monster[];
-  StripeAccount: StripeAccount[];
 }
 
 export class LoginRequest {
@@ -55,4 +66,13 @@ export class DeleteNotificationTokenRequest {
 export class UpdateTokenActiveStateRequest {
   token: string;
   active: boolean;
+}
+
+export interface MeResponse {
+  invoices: Invoice[];
+  stripeAccount: StripeAccount[];
+  stripePayments: StripePayments[];
+  transaction: Transaction[];
+  wallet: Wallet[];
+  user: BasicUser;
 }

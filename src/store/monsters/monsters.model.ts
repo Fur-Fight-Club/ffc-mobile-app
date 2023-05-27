@@ -1,5 +1,5 @@
 import { User } from "@store/application/application.model";
-import { MatchWaitingList } from "@store/matches/matches.model";
+import { Match, MatchWaitingList } from "@store/matches/matches.model";
 
 export type WeightCategoryType =
   | "A_FINE_BOI"
@@ -31,6 +31,6 @@ export interface Monster {
   fk_user: number;
   mmr: number;
   MatchWaitingList: MatchWaitingList[];
-  MatchFighter1: object[];
-  MatchFighter2: object[];
+  MatchFighter1: Match[];
+  MatchFighter2: Match[];
 }
