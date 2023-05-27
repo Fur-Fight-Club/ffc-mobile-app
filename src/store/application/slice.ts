@@ -7,6 +7,8 @@ import {
   LoginResponse,
   MeResponse,
   RegisterRequest,
+  UpdateRequest,
+  UpdateResponse,
   User,
 } from "./application.model";
 import { GenericApiError } from "@store/store.model";
@@ -122,17 +124,19 @@ export const applicationApi = createApi({
     }),
 
     // update user
-    UpdateUser: builder.query<MeResponse, void>({
-      query: () => ({
-        url: `${endpoint.me}`,
-        method: "GET",
+    UpdateUser: builder.mutation<UpdateResponse, UpdateRequest>({
+      query: (user) => ({
+        url: `${endpoint.update}`,
+        method: "PATCH",
+        body: user,
       }),
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         dispatch(setLoading(true));
         try {
           const { data } = await queryFulfilled;
+          // update state user with new data
+          dispatch(setUpdateUser(data));
           dispatch(setLoading(false));
-          dispatch(setUserInformation(data));
         } catch (err) {
           const error = err as GenericApiError;
           dispatch(setLoading(false));
@@ -174,6 +178,14 @@ export const applicationSlice = createSlice({
         transaction: action.payload.transaction,
       };
     },
+    setUpdateUser: (
+      state,
+      action: PayloadAction<{ firstname: string; lastname: string }>
+    ) => {
+      const { firstname, lastname } = action.payload;
+      firstname && (state.user.firstname = firstname);
+      lastname && (state.user.lastname = lastname);
+    },
   },
 });
 
@@ -183,6 +195,7 @@ export const {
   setNotificationToken,
   setToken,
   setUserInformation,
+  setUpdateUser,
 } = applicationSlice.actions;
 
 export const {
@@ -190,4 +203,5 @@ export const {
   useRegisterMutation,
   useAskResetPasswordMutation,
   useGetUserQuery,
+  useUpdateUserMutation,
 } = applicationApi;

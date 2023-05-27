@@ -1,10 +1,13 @@
 import { BackArrow } from "@components/ui/atoms/BackArrow.component";
 import { Input } from "@components/ui/atoms/Input.component";
 import { Spacer } from "@components/ui/atoms/Spacer.component";
+import { SettingsNavigation } from "@navigation/Settings.navigation";
+import { SettingsRoutes } from "@navigation/navigation.model";
 import { useNavigation } from "@react-navigation/native";
 import { applicationState } from "@store/application/selector";
+import { useUpdateUserMutation } from "@store/application/slice";
 import { hp, wp } from "@utils/responsive.utils";
-import * as React from "react";
+import { useEffect, useState } from "react";
 import {
   StyleSheet,
   KeyboardAvoidingView,
@@ -12,6 +15,7 @@ import {
   Platform,
   View,
 } from "react-native";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { Text, Button, Colors } from "react-native-ui-lib";
 import { useSelector } from "react-redux";
 
@@ -21,9 +25,30 @@ export const ProfilScreen: React.FunctionComponent<
   ProfilScreenProps
 > = ({}) => {
   const nav = useNavigation();
+  const [update, updateMutation] = useUpdateUserMutation();
+  const [fullname, setFullname] = useState("");
   const { user } = useSelector(applicationState);
 
-  const [fullname, setFullname] = React.useState("");
+  const handleSubmitProfil = () => {
+    const [firstname, lastname] = fullname.split(" ");
+
+    if (!fullname) {
+      Toast.show({
+        type: "error",
+        text1: "✍️ Oups !",
+        text2: "Veuillez entrer votre nom complet",
+      });
+    }
+
+    update({ firstname, lastname });
+  };
+
+  useEffect(() => {
+    if (updateMutation.isSuccess) {
+      // @ts-ignore
+      nav.navigate(SettingsRoutes.MENU);
+    }
+  }, [updateMutation.isSuccess]);
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -48,7 +73,7 @@ export const ProfilScreen: React.FunctionComponent<
             label={"Modifier"}
             size={Button.sizes.large}
             backgroundColor={Colors.red30}
-            onPress={() => handleSubmitRegister()}
+            onPress={() => handleSubmitProfil()}
           />
         </View>
       </ScrollView>
@@ -85,7 +110,6 @@ const styles = StyleSheet.create({
   },
   oldFullName: {
     top: hp("2%"),
-    fontFamily: "Poppin",
     fontSize: hp("2%"),
   },
 });

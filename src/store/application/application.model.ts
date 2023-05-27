@@ -47,8 +47,26 @@ export class RegisterRequest {
   password: string;
 }
 
+export class UpdateRequest {
+  id?: number;
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  password?: string;
+}
+
 export class LoginResponse {
   access_token: string;
+}
+
+export class UpdateResponse {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  role: "ADMIN" | "USER" | "MONSTER_OWNER";
+  email_token: string;
+  is_email_verified: boolean;
 }
 
 export interface MeResponse {
