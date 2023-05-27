@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "510153483100",
+    "project_id": "fury-fight-club",
+    "storage_bucket": "fury-fight-club.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510153483100:android:a42c816b2fad33f6fad799",
+        "android_client_info": {
+          "package_name": "com.mistergooddeal.furfightclub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVIPV0jnRuviv1piu_GivewQKTcPP9-ws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
