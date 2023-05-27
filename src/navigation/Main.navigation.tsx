@@ -5,10 +5,20 @@ import { Loader } from "@components/ui/molecules/Loader.component";
 import { useSelector } from "react-redux";
 import { applicationState } from "@store/application/selector";
 import { NotConnectedNavigation } from "./NotConnected.navigation";
-import * as Notifications from "expo-notifications";
 import { useUpsertNotificationTokenMutation } from "@store/application/slice";
 import messaging from "@react-native-firebase/messaging";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import * as Device from "expo-device";
+import * as Notifications from "expo-notifications";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 interface MainNavigationProps {}
 
@@ -18,30 +28,63 @@ export const MainNavigation: React.FunctionComponent<
   const { loading, token, notification_token } = useSelector(applicationState);
   const [upsertNotificationToken] = useUpsertNotificationTokenMutation();
 
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
   useEffect(() => {
+    console.log("notification_token", notification_token);
+
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      Alert.alert("A new FCM message arrived!");
+      schedulePushNotification(
+        remoteMessage.notification.title,
+        remoteMessage.notification.body,
+        remoteMessage.data
+      );
       console.log(JSON.stringify(remoteMessage));
     });
-    return unsubscribe;
+
+    if (!notification_token && token !== "") {
+      (async () => {
+        await requestUserPermission();
+
+        messaging()
+          .getToken()
+          .then((token) => {
+            console.log("token", token);
+            const platform = Platform.OS === "ios" ? "IOS" : "ANDROID";
+            upsertNotificationToken({
+              token,
+              platform,
+            });
+          });
+      })();
+    }
+
+    // @ts-ignore
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener((notification) => {
+        // @ts-ignore
+        setNotification(notification);
+      });
+    // @ts-ignore
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        console.log(response);
+      });
+
+    return () => {
+      Notifications.removeNotificationSubscription(
+        notificationListener.current
+      );
+      Notifications.removeNotificationSubscription(responseListener.current);
+      unsubscribe();
+    };
   }, []);
 
   messaging().setBackgroundMessageHandler(async (remoteMessage) => {
     console.log("Message handled in the background!", remoteMessage);
   });
-
-  if (!notification_token && token !== "") {
-    (async () => {
-      console.log("No token found, retrieving a notification token...");
-      const expoToken = (await Notifications.getDevicePushTokenAsync()).data;
-      const platform = Platform.OS === "ios" ? "IOS" : "ANDROID";
-      console.log("expoToken", expoToken, platform);
-      upsertNotificationToken({
-        token: expoToken,
-        platform,
-      });
-    })();
-  }
 
   return (
     <>
@@ -60,8 +103,22 @@ async function requestUserPermission() {
     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
   if (enabled) {
-    console.log("Authorization status:", authStatus);
   }
+}
+
+async function schedulePushNotification(
+  title: string,
+  body: string,
+  data: any
+) {
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title,
+      body,
+      data,
+    },
+    trigger: { seconds: 2 },
+  });
 }
 
 const styles = StyleSheet.create({});
