@@ -174,11 +174,12 @@ export const applicationApi = createApi({
         try {
           await queryFulfilled;
           dispatch(setLoading(false));
-          dispatch(setNotificationToken(undefined));
+          dispatch(setNotificationToken(null));
         } catch (err) {
           const error = err as GenericApiError;
           console.log(error);
           dispatch(setLoading(false));
+          dispatch(setNotificationToken(null));
         }
       },
     }),
@@ -258,7 +259,7 @@ export const applicationSlice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
-    setNotificationToken: (state, action: PayloadAction<string>) => {
+    setNotificationToken: (state, action: PayloadAction<string | null>) => {
       state.notification_token = action.payload;
     },
     setToken(state, action: PayloadAction<string>) {

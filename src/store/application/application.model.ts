@@ -12,7 +12,7 @@ import { NotificationSettings } from "ffc-prisma-package/dist/client";
 export interface App {
   user: User;
   loading: boolean;
-  notification_token: string;
+  notification_token: string | null;
   token: string;
 }
 
@@ -21,7 +21,7 @@ export interface User extends BasicUser {
   MatchMessage: MatchMessage[];
   Monster: Monster[];
   StripeAccount: StripeAccount[];
-  Wallet: Wallet;
+  Wallet?: Wallet;
   transaction: Transaction[];
 }
 
