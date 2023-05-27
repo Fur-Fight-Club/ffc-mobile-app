@@ -300,8 +300,4 @@ export const {
   useRegisterMutation,
   useAskResetPasswordMutation,
   useGetUserQuery,
-  useUpsertNotificationTokenMutation,
-  useDeleteNotificationTokenMutation,
-  useUpdateTokenActiveStateMutation,
-  useUpdateUserMutation,
 } = applicationApi;
