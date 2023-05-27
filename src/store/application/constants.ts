@@ -29,4 +29,6 @@ export const endpoint = {
   register: "user/register",
   askResetPassword: "account/ask-reset-password",
   me: "user/me",
+  notificationToken: "push-notifications",
+  notificationTokenActive: "push-notifications/active",
 };

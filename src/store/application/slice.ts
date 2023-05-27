@@ -3,9 +3,13 @@ import { CACHE_KEY, endpoint, initialState, reducerPath } from "./constants";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { baseQuery } from "@store/api";
 import {
+  DeleteNotificationTokenRequest,
   LoginRequest,
   LoginResponse,
   RegisterRequest,
+  UpdateTokenActiveStateRequest,
+  UpsertNotificationTokenRequest,
+  UpsertNotificationTokenResponse,
   User,
 } from "./application.model";
 import { GenericApiError } from "@store/store.model";
@@ -119,6 +123,99 @@ export const applicationApi = createApi({
         }
       },
     }),
+
+    // Upsert notification token
+    upsertNotificationToken: builder.mutation<
+      UpsertNotificationTokenResponse,
+      UpsertNotificationTokenRequest
+    >({
+      query: (body) => ({
+        url: `${endpoint.notificationToken}`,
+        method: "POST",
+        body,
+      }),
+
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        dispatch(setLoading(true));
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setLoading(false));
+          dispatch(setNotificationToken(data.token));
+        } catch (err) {
+          const error = err as GenericApiError;
+          console.log(error);
+
+          dispatch(setLoading(false));
+          Toast.show({
+            type: "error",
+            text1: "🚨 Erreur !",
+            text2: "Une erreur est survenue, veuillez relancer l'application",
+          });
+        }
+      },
+    }),
+
+    // Delete notification token
+    deleteNotificationToken: builder.mutation<
+      UpsertNotificationTokenResponse,
+      DeleteNotificationTokenRequest
+    >({
+      query: (body) => ({
+        url: `${endpoint.notificationToken}`,
+        method: "DELETE",
+        body,
+      }),
+
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        dispatch(setLoading(true));
+        try {
+          await queryFulfilled;
+          dispatch(setLoading(false));
+          dispatch(setNotificationToken(undefined));
+        } catch (err) {
+          const error = err as GenericApiError;
+          console.log(error);
+          dispatch(setLoading(false));
+        }
+      },
+    }),
+
+    // Update token active state
+    updateTokenActiveState: builder.mutation<
+      UpsertNotificationTokenResponse,
+      UpdateTokenActiveStateRequest
+    >({
+      query: (body) => ({
+        url: `${endpoint.notificationTokenActive}`,
+        method: "PATCH",
+        body,
+      }),
+
+      async onQueryStarted(body, { dispatch, queryFulfilled }) {
+        dispatch(setLoading(true));
+        try {
+          await queryFulfilled;
+          dispatch(setLoading(false));
+          Toast.show({
+            type: "success",
+            text1: "📳 Notification !",
+            text2: `Vous avez bien ${
+              body.active ? "activé" : "désactivé"
+            } les notifications`,
+          });
+        } catch (err) {
+          const error = err as GenericApiError;
+          console.log(error);
+          dispatch(setLoading(false));
+          Toast.show({
+            type: "error",
+            text1: "🚨 Erreur !",
+            text2:
+              "Erreur lors de la mise à jour de vos paramètres, veuillez réessayer",
+          });
+        }
+      },
+    }),
   }),
 });
 
@@ -149,4 +246,7 @@ export const {
   useRegisterMutation,
   useAskResetPasswordMutation,
   useGetUserQuery,
+  useUpsertNotificationTokenMutation,
+  useDeleteNotificationTokenMutation,
+  useUpdateTokenActiveStateMutation,
 } = applicationApi;

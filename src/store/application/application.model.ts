@@ -1,6 +1,7 @@
 import { Invoice, StripeAccount } from "@store/payments/payments.model";
 import { MatchMessage } from "@store/notifications/notifications.model";
 import { Monster } from "@store/monsters/monsters.model";
+import { NotificationSettings } from "ffc-prisma-package/dist/client";
 
 export interface App {
   user: User;
@@ -38,4 +39,20 @@ export class RegisterRequest {
 
 export class LoginResponse {
   access_token: string;
+}
+
+export class UpsertNotificationTokenRequest {
+  token: string;
+  platform: "IOS" | "ANDROID" | "WEB";
+}
+
+export type UpsertNotificationTokenResponse = NotificationSettings;
+
+export class DeleteNotificationTokenRequest {
+  token: string;
+}
+
+export class UpdateTokenActiveStateRequest {
+  token: string;
+  active: boolean;
 }
