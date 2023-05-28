@@ -15,6 +15,8 @@ import {
 } from "redux-persist";
 import { combineReducers } from "redux";
 import { applicationApi } from "./application/slice";
+import { walletApi } from "./wallet/slice";
+import { bankAccountApi } from "./bank-account/slice";
 
 const combinedReducers = combineReducers({
   ...reducers,
@@ -44,7 +46,12 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(rtkQueryErrorLogger, applicationApi.middleware),
+    }).concat(
+      rtkQueryErrorLogger,
+      applicationApi.middleware,
+      walletApi.middleware,
+      bankAccountApi.middleware
+    ),
 });
 
 export type AppDispatch = typeof store.dispatch;

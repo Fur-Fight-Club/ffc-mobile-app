@@ -117,6 +117,8 @@ export const applicationApi = createApi({
           dispatch(setUserInformation(data));
         } catch (err) {
           const error = err as GenericApiError;
+          console.log(error.error.data);
+
           dispatch(setLoading(false));
           Toast.show({
             type: "error",
@@ -303,4 +305,5 @@ export const {
   useGetUserQuery,
   useUpsertNotificationTokenMutation,
   useDeleteNotificationTokenMutation,
+  useUpdateUserMutation,
 } = applicationApi;

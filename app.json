@@ -1,9 +1,12 @@
 {
   "expo": {
     "name": "fur-fight-club",
-    "slug": "fur-fight-club",
     "version": "1.0.0",
     "sdkVersion": "48.0.0",
+    "scheme": "https",
+    "slug": "ffc.mistergooddeal.org",
+    "hostType": "domain",
+    "orientation": "portrait",
     "platforms": [
       "ios",
       "android",
@@ -11,10 +14,24 @@
     ],
     "android": {
       "package": "com.mistergooddeal.furfightclub",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "https",
+              "host": "ffc.mistergooddeal.org",
+              "pathPrefix": "/payments"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "ios": {
       "bundleIdentifier": "com.mistergooddeal.furfightclub",
+      "associatedDomains": ["applinks:ffc.mistergooddeal.org"],
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
         "UIBackgroundModes": [

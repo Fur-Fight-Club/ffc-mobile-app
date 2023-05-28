@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["GC4RN35B82.com.mistergooddeal.furfightclub"],
+        "components": [
+          {
+            "/": "/payments/*",
+            "comment": "Matches any URL whose path starts with /payments/"
+          }
+        ]
+      }
+    ]
+  }
+}
