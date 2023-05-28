@@ -35,10 +35,6 @@ export const MainNavigation: React.FunctionComponent<
   const url = Linking.useURL();
 
   useEffect(() => {
-    console.log({ url });
-  }, [url]);
-
-  useEffect(() => {
     console.log("notification_token", notification_token);
 
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
