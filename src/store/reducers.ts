@@ -1,4 +1,5 @@
 import { applicationApi, applicationSlice } from "./application/slice";
+import { bankAccountApi, bankAccountSlice } from "./bank-account/slice";
 import { matchesApi, matchesSlice } from "./matches/slice";
 import { walletApi, walletSlice } from "./wallet/slice";
 
@@ -9,4 +10,6 @@ export const reducers = {
   [matchesSlice.name]: matchesSlice.reducer,
   [walletSlice.name]: walletSlice.reducer,
   [walletApi.reducerPath]: walletApi.reducer,
+  [bankAccountSlice.name]: bankAccountSlice.reducer,
+  [bankAccountApi.reducerPath]: bankAccountApi.reducer,
 } as const;
