@@ -12,4 +12,5 @@ export const CACHE_KEY = "Wallet";
 export const endpoint = {
   get: "wallet/balance",
   withdraw: "wallet/withdraw",
+  buyCredits: "credits/buy",
 };
