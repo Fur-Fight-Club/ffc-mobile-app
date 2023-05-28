@@ -113,8 +113,6 @@ export const applicationApi = createApi({
         dispatch(setLoading(true));
         try {
           const { data } = await queryFulfilled;
-          console.log({ data });
-
           dispatch(setLoading(false));
           dispatch(setUserInformation(data));
         } catch (err) {
@@ -307,4 +305,5 @@ export const {
   useGetUserQuery,
   useUpsertNotificationTokenMutation,
   useDeleteNotificationTokenMutation,
+  useUpdateUserMutation,
 } = applicationApi;
