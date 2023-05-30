@@ -267,6 +267,11 @@ export const applicationSlice = createSlice({
     setToken(state, action: PayloadAction<string>) {
       state.token = action.payload;
     },
+    logout: (state) => {
+      state.notification_token = initialState.notification_token;
+      state.user = initialState.user;
+      state.token = initialState.token;
+    },
     setUserInformation: (state, action: PayloadAction<MeResponse>) => {
       state.user = {
         ...action.payload.user,
@@ -294,6 +299,7 @@ export const {
   setLoading,
   setNotificationToken,
   setToken,
+  logout,
   setUserInformation,
   setUpdateUser,
 } = applicationSlice.actions;

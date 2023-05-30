@@ -8,6 +8,7 @@ import { Colors } from "react-native-ui-lib";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import {
+  logout,
   setToken,
   useDeleteNotificationTokenMutation,
 } from "@store/application/slice";
@@ -58,7 +59,7 @@ export const SetttingsMenuScreen: React.FunctionComponent<
           // @ts-ignore
           onPress={() => {
             deleteNotificationToken({ token: notification_token });
-            dispatch(setToken(""));
+            dispatch(logout());
           }}
         />
       </View>
