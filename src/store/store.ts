@@ -17,6 +17,7 @@ import { combineReducers } from "redux";
 import { applicationApi } from "./application/slice";
 import { walletApi } from "./wallet/slice";
 import { bankAccountApi } from "./bank-account/slice";
+import { monstersApi } from "./monsters/slice";
 
 const combinedReducers = combineReducers({
   ...reducers,
@@ -50,7 +51,8 @@ export const store = configureStore({
       rtkQueryErrorLogger,
       applicationApi.middleware,
       walletApi.middleware,
-      bankAccountApi.middleware
+      bankAccountApi.middleware,
+      monstersApi.middleware
     ),
 });
 
