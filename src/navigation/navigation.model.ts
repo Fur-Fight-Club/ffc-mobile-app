@@ -14,7 +14,6 @@ export enum BottomTabRoutes {
 export enum SettingsRoutes {
   MENU = "MenuSettings",
   PROFIL = "Profile",
-  MONSTERS = "Monsters",
   WALLET = "Protefeuille",
   PASSWORD = "PasswordSettings",
   NOTIFICATIONS = "Notifications",

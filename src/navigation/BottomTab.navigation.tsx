@@ -9,6 +9,7 @@ import { BottomTabRoutes } from "./navigation.model";
 import { useGetUserQuery } from "@store/application/slice";
 import { useEffect } from "react";
 import { SettingsNavigation } from "./Settings.navigation";
+import { ProfileScreen } from "@screens/Profile.screen";
 
 interface BottomTabNavigationProps {}
 
@@ -35,7 +36,7 @@ export const BottomTabNavigation: React.FunctionComponent<
     >
       <Tab.Screen
         name={BottomTabRoutes.PROFILE}
-        component={TemplateScreen}
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} icon={"award"} />

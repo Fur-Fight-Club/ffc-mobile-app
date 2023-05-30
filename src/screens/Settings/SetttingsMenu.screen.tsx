@@ -44,12 +44,6 @@ export const SetttingsMenuScreen: React.FunctionComponent<
           onPress={() => nav.navigate(SettingsRoutes.PASSWORD)}
         />
         <MenuList
-          // @ts-ignore
-          onPress={() => nav.navigate(SettingsRoutes.MONSTERS)}
-        >
-          Mes monstres
-        </MenuList>
-        <MenuList
           children="Voir mon wallet"
           // @ts-ignore
           onPress={() => nav.navigate(SettingsRoutes.WALLET)}
