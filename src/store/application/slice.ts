@@ -14,6 +14,8 @@ import {
   UpdateRequest,
   UpdateResponse,
   User,
+  UpdatePasswordRequest,
+  UpdatePasswordResponse,
 } from "./application.model";
 import { GenericApiError } from "@store/store.model";
 import { loginErrorsHandler } from "./errors/login.error";
@@ -248,6 +250,32 @@ export const applicationApi = createApi({
         }
       },
     }),
+
+    // update user password
+    UpdateUserPassword: builder.mutation<
+      UpdatePasswordResponse,
+      UpdatePasswordRequest
+    >({
+      query: (body) => ({
+        url: `${endpoint.updatePassword}`,
+        method: "PATCH",
+        body,
+      }),
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        dispatch(setLoading(true));
+        try {
+          dispatch(setLoading(false));
+        } catch (err) {
+          const error = err as GenericApiError;
+          dispatch(setLoading(false));
+          Toast.show({
+            type: "error",
+            text1: "🚨 Erreur !",
+            text2: "Une erreur est survenue, veuillez réessayer",
+          });
+        }
+      },
+    }),
   }),
 });
 
@@ -312,4 +340,5 @@ export const {
   useUpsertNotificationTokenMutation,
   useDeleteNotificationTokenMutation,
   useUpdateUserMutation,
+  useUpdateUserPasswordMutation,
 } = applicationApi;
