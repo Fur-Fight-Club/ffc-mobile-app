@@ -21,9 +21,11 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { MainNavigation } from "@navigation/Main.navigation";
 import Toast from "react-native-toast-message";
+import { enableLatestRenderer } from "react-native-maps";
 
 export default function App() {
   let persistor = persistStore(store);
+  enableLatestRenderer();
 
   const [loaded] = useFonts({
     SplatterKings: require("./src/assets/fonts/SplatterKings-Bgex.ttf"),
