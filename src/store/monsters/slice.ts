@@ -9,6 +9,7 @@ import { GenericApiError } from "@store/store.model";
 import { createMonsterErrorsHandler } from "./errors/create";
 import { updateMonstersHandler } from "./errors/update";
 import { deleteMonstersHandler } from "./errors/delete";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 export const monstersApi = createApi({
   reducerPath,
@@ -60,7 +61,12 @@ export const monstersApi = createApi({
       Monster,
       Pick<
         Monster,
-        "name" | "weight" | "fk_user" | "weight_category" | "monster_type"
+        | "name"
+        | "weight"
+        | "fk_user"
+        | "weight_category"
+        | "monster_type"
+        | "picture"
       >
     >({
       query: (monster) => ({
@@ -74,6 +80,11 @@ export const monstersApi = createApi({
         try {
           const { data } = await queryFulfilled;
           dispatch(setLoading(false));
+          Toast.show({
+            type: "success",
+            text1: "👹 Roaaar !",
+            text2: "Le monstre a bien été créé.",
+          });
         } catch (err) {
           const error = err as GenericApiError;
           dispatch(setLoading(false));
@@ -98,6 +109,11 @@ export const monstersApi = createApi({
 
       async onQueryStarted(resource, { dispatch, queryFulfilled }) {
         dispatch(setLoading(true));
+        Toast.show({
+          type: "success",
+          text1: "👹 Roaaar !",
+          text2: "Le monstre a bien été modifié.",
+        });
         try {
           const { data } = await queryFulfilled;
           dispatch(setLoading(false));

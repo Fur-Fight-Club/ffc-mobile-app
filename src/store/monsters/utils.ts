@@ -1,6 +1,8 @@
 import { Monster } from "./monsters.model";
 
-export const convertApiTypeToType = (apiType: Monster["monster_type"]) => {
+export const convertApiTypeToType = (
+  apiType: Monster["monster_type"] | string
+) => {
   switch (apiType) {
     case "ELEMENTARY":
       return "Élémentaire";
@@ -26,6 +28,28 @@ export const convertApiTypeToType = (apiType: Monster["monster_type"]) => {
       return "Inconnu";
   }
 };
+
+export const monsterType = [
+  "ELEMENTARY",
+  "FANTASTIC",
+  "MYTHOLOGICAL",
+  "SCARY",
+  "AQUATIC",
+  "WINGED",
+  "PREHISTORIC",
+  "MECHANICAL",
+  "EXTRATERRESTRIAL",
+  "MAGICAL",
+];
+
+export const weightCategories = [
+  "A_FINE_BOI",
+  "HE_CHOMNK",
+  "A_HECKING_CHONKER",
+  "HEFTY_CHONK",
+  "MEGA_CHONKER",
+  "OH_LAWD_HE_COMIN",
+];
 
 export const addDotEveryThreeDigits = (number: number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
