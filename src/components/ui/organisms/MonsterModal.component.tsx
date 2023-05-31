@@ -120,7 +120,7 @@ export const MonsterModal: React.FunctionComponent<MonsterModalProps> = ({
         monster_type: type.value,
         weight_category: weightCategory.value,
         weight: +weight.replace(",", "."),
-        picture: image,
+        picture: image.includes("data:image/png;base64,") ? image : undefined,
         fk_user: user.id,
       });
     }
