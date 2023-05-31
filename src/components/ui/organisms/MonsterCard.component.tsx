@@ -1,4 +1,7 @@
-import { convertApiTypeToType } from "@store/monsters/utils";
+import {
+  addDotEveryThreeDigits,
+  convertApiTypeToType,
+} from "@store/monsters/utils";
 import { Fonts } from "@utils/fonts.utils";
 import { hp } from "@utils/responsive.utils";
 import * as React from "react";
@@ -41,7 +44,9 @@ export const MonsterCard: React.FunctionComponent<MonsterCardProps> = ({
           <Text>MMR</Text>
         </View>
         <View row>
-          <Text style={styles.monsterMmr}>{monster.weight}</Text>
+          <Text style={styles.monsterMmr}>
+            {addDotEveryThreeDigits(monster.weight)}
+          </Text>
           <Text>KG</Text>
         </View>
       </View>
