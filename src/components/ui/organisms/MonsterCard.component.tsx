@@ -13,11 +13,13 @@ import { Monster } from "@store/monsters/monsters.model";
 interface MonsterCardProps {
   monster: Monster;
   handleDeleteMonster: (id: number) => void;
+  handleUpdateMonster: (monster: Monster) => void;
 }
 
 export const MonsterCard: React.FunctionComponent<MonsterCardProps> = ({
   monster,
   handleDeleteMonster,
+  handleUpdateMonster,
 }) => {
   return (
     <View
@@ -71,7 +73,7 @@ export const MonsterCard: React.FunctionComponent<MonsterCardProps> = ({
           label={"Modifier"}
           size={Button.sizes.large}
           backgroundColor={Colors.red30}
-          onPress={() => null}
+          onPress={() => handleUpdateMonster(monster)}
         />
         <Button
           label={"Supprimer"}
