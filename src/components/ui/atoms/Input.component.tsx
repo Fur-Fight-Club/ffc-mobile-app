@@ -1,6 +1,6 @@
 import { hp } from "@utils/responsive.utils";
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import { KeyboardTypeOptions, StyleSheet, View } from "react-native";
 import { TextField } from "react-native-ui-lib";
 
 interface InputProps {
@@ -38,6 +38,8 @@ interface InputProps {
     | "password"
     | "newPassword"
     | "oneTimeCode";
+  width?: string;
+  keyboardType?: KeyboardTypeOptions;
 }
 
 export const Input: React.FunctionComponent<InputProps> = ({
@@ -47,6 +49,8 @@ export const Input: React.FunctionComponent<InputProps> = ({
   showCharCounter,
   placeholder,
   type,
+  width,
+  keyboardType,
 }) => {
   return (
     <TextField
@@ -56,6 +60,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
       value={value}
       textContentType={type}
       secureTextEntry={type === "password" ? true : false}
+      keyboardType={keyboardType ? keyboardType : "default"}
       labelStyle={{
         fontFamily: "Poppins_400Regular",
       }}
@@ -63,7 +68,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
         fontFamily: "Poppins_400Regular",
       }}
       fieldStyle={{
-        width: "80%",
+        width: width ? width : "80%",
         paddingVertical: hp("3%"),
         paddingHorizontal: hp("2%"),
         backgroundColor: "#fff",
@@ -79,7 +84,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
         borderRadius: 10,
       }}
       style={{
-        width: "80%",
+        width: width ? width : "80%",
       }}
       showCharCounter={showCharCounter}
       maxLength={maxLenght ? maxLenght : undefined}
