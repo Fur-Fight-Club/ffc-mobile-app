@@ -110,9 +110,9 @@ export const monstersApi = createApi({
     }),
 
     // Delete monster
-    deleteMonster: builder.mutation<void, Monster>({
-      query: (monster) => ({
-        url: endpoint.delete(monster.id),
+    deleteMonster: builder.mutation<Monster, number>({
+      query: (monsterId) => ({
+        url: endpoint.delete(monsterId),
         method: "DELETE",
       }),
 

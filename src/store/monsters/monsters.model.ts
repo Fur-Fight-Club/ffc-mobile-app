@@ -33,4 +33,5 @@ export interface Monster {
   MatchWaitingList: MatchWaitingList[];
   MatchFighter1: Match[];
   MatchFighter2: Match[];
+  picture: string;
 }
