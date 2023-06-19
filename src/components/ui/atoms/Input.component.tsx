@@ -40,6 +40,7 @@ interface InputProps {
     | "oneTimeCode";
   width?: string;
   keyboardType?: KeyboardTypeOptions;
+  pressEnter?: () => void;
 }
 
 export const Input: React.FunctionComponent<InputProps> = ({
@@ -51,6 +52,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
   type,
   width,
   keyboardType,
+  pressEnter,
 }) => {
   return (
     <TextField
@@ -67,6 +69,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
       floatingPlaceholderStyle={{
         fontFamily: "Poppins_400Regular",
       }}
+      onSubmitEditing={() => pressEnter()}
       fieldStyle={{
         width: width ? width : "80%",
         paddingVertical: hp("3%"),

@@ -1,4 +1,6 @@
 import { Monster, WeightCategoryType } from "@store/monsters/monsters.model";
+import { MatchMessage } from "@store/notifications/notifications.model";
+import { Arena } from "ffc-prisma-package/dist/client";
 
 export interface Matches {
   matches: Match[];
@@ -17,15 +19,33 @@ export interface MatchWaitingList {
 
 export interface Match {
   id: number;
-  monster1: object;
-  monster2: object;
+  Monster1: Monster;
+  Monster2: Monster;
   fk_monster1: number;
   fk_monster2: number;
   matchStartDate: Date;
   matchEndDate: Date;
-  MatchWaitingList: object[];
-  Arena: object;
+  MatchWaitingList: MatchWaitingList[];
+  Arena: Arena;
   fk_arena: number;
-  MatchMessage: object[];
+  MatchMessage: MatchMessage[];
   weight_category: WeightCategoryType;
+  Transaction: {
+    Wallet: {
+      User: {
+        firstname: string;
+        lastname: string;
+      };
+    };
+    Monster: {
+      name: Monster["name"];
+    };
+    amount: number;
+  }[];
+}
+
+export interface PlaceBet {
+  matchId: number;
+  monster: number;
+  amount: number;
 }

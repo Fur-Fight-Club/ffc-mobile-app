@@ -10,6 +10,7 @@ import { useGetUserQuery } from "@store/application/slice";
 import { useEffect } from "react";
 import { SettingsNavigation } from "./Settings.navigation";
 import { ProfileScreen } from "@screens/Profile.screen";
+import { HomeScreen } from "@screens/Home.screen";
 
 interface BottomTabNavigationProps {}
 
@@ -45,7 +46,7 @@ export const BottomTabNavigation: React.FunctionComponent<
       />
       <Tab.Screen
         name={BottomTabRoutes.HOME}
-        component={TestScreen}
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} icon={"home"} />

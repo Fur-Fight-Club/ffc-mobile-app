@@ -1,31 +1,32 @@
-import { Monster } from "./monsters.model";
+import { Colors } from "react-native-ui-lib";
+import { Monster, WeightCategoryType } from "./monsters.model";
 
 export const convertApiTypeToType = (
   apiType: Monster["monster_type"] | string
 ) => {
   switch (apiType) {
     case "ELEMENTARY":
-      return "Élémentaire";
+      return "🌋 Élémentaire";
     case "FANTASTIC":
-      return "Fantastique";
+      return "🦄 Fantastique";
     case "MYTHOLOGICAL":
-      return "Mythologique";
+      return "🏛️ Mythologique";
     case "SCARY":
-      return "Effrayant";
+      return "👻 Effrayant";
     case "AQUATIC":
-      return "Aquatique";
+      return "🌊 Aquatique";
     case "WINGED":
-      return "Ailé";
+      return "🪽 Ailé";
     case "PREHISTORIC":
-      return "Préhistorique";
+      return "🦖 Préhistorique";
     case "MECHANICAL":
-      return "Mécanique";
+      return "⚙️ Mécanique";
     case "EXTRATERRESTRIAL":
-      return "Extraterrestre";
+      return "🛸 Extraterrestre";
     case "MAGICAL":
-      return "Magique";
+      return "🪄 Magique";
     default:
-      return "Inconnu";
+      return "❓ Inconnu";
   }
 };
 
@@ -50,6 +51,26 @@ export const weightCategories = [
   "MEGA_CHONKER",
   "OH_LAWD_HE_COMIN",
 ];
+
+// Red color gradient for weight categories
+export const weightCategoryColors = (weightCategory: WeightCategoryType) => {
+  switch (weightCategory) {
+    case "A_FINE_BOI":
+      return Colors.red50;
+    case "HE_CHOMNK":
+      return Colors.red40;
+    case "A_HECKING_CHONKER":
+      return Colors.red30;
+    case "HEFTY_CHONK":
+      return Colors.red20;
+    case "MEGA_CHONKER":
+      return Colors.red10;
+    case "OH_LAWD_HE_COMIN":
+      return Colors.black;
+    default:
+      return Colors.red60;
+  }
+};
 
 export const addDotEveryThreeDigits = (number: number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
