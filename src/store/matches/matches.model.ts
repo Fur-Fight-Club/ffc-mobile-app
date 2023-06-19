@@ -30,4 +30,22 @@ export interface Match {
   fk_arena: number;
   MatchMessage: MatchMessage[];
   weight_category: WeightCategoryType;
+  Transaction: {
+    Wallet: {
+      User: {
+        firstname: string;
+        lastname: string;
+      };
+    };
+    Monster: {
+      name: Monster["name"];
+    };
+    amount: number;
+  }[];
+}
+
+export interface PlaceBet {
+  matchId: number;
+  monster: number;
+  amount: number;
 }
