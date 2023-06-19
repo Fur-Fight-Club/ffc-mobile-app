@@ -6,17 +6,18 @@ import {
 import { hp } from "@utils/responsive.utils";
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { Avatar, Badge, Colors, View, Text } from "react-native-ui-lib";
+import { Avatar, Badge, Colors, View, Text, Button } from "react-native-ui-lib";
 import { Spacer } from "../atoms/Spacer.component";
 import { Fonts } from "@utils/fonts.utils";
 
 interface MonsterStatsCardProps {
   monster: Monster;
+  placeBet: () => void;
 }
 
 export const MonsterStatsCard: React.FunctionComponent<
   MonsterStatsCardProps
-> = ({ monster }) => {
+> = ({ monster, placeBet }) => {
   return (
     <View flex center>
       <Avatar label={"📸"} size={hp("10%")} source={{ uri: monster.picture }} />
@@ -43,6 +44,12 @@ export const MonsterStatsCard: React.FunctionComponent<
           backgroundColor={Colors.red20}
         />
       </View>
+      <Spacer size={hp("3%")} />
+      <Button
+        label="Parier"
+        backgroundColor={Colors.red30}
+        onPress={placeBet}
+      />
     </View>
   );
 };

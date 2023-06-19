@@ -15,7 +15,15 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native";
-import { Avatar, Badge, Card, Colors, Text, View } from "react-native-ui-lib";
+import {
+  Avatar,
+  Badge,
+  Button,
+  Card,
+  Colors,
+  Text,
+  View,
+} from "react-native-ui-lib";
 import { Marker } from "react-native-maps";
 import MapView from "react-native-maps";
 import { MonsterVersusCard } from "@components/ui/organisms/MonsterVersusCard.component";
@@ -55,7 +63,11 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = ({}) => {
       >
         <View marginH-30 marginT-100>
           {matches?.map((match) => (
-            <MonsterVersusCard key={match.id} match={match} />
+            <MonsterVersusCard
+              key={match.id}
+              match={match}
+              refetch={refetchResources}
+            />
           ))}
         </View>
       </ScrollView>
