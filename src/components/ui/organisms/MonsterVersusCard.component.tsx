@@ -10,6 +10,7 @@ import { Fonts } from "@utils/fonts.utils";
 import { Match } from "@store/matches/matches.model";
 import { usePlaceBetMutation } from "@store/matches/slice";
 import { ModalBets } from "./ModalBets.component";
+import { ModalChat } from "./ModalChat.component";
 
 interface MonsterVersusCardProps {
   match: Match;
@@ -50,6 +51,8 @@ export const MonsterVersusCard: React.FunctionComponent<
       "plain-text"
     );
   };
+
+  const [chatVisible, setChatVisible] = React.useState(false);
 
   return (
     <Card flex center style={styles.card} marginV-10 key={match.id}>
@@ -102,7 +105,14 @@ export const MonsterVersusCard: React.FunctionComponent<
           width: "100%",
         }}
       >
-        <Button label="Chat du match" backgroundColor={Colors.red30} />
+        <Button
+          label="Chat du match"
+          backgroundColor={Colors.red30}
+          onPress={() => {
+            refetch();
+            setChatVisible(true);
+          }}
+        />
         <Button
           label="Voir les paris"
           backgroundColor={Colors.red30}
@@ -115,6 +125,13 @@ export const MonsterVersusCard: React.FunctionComponent<
           setBetsVisible(false);
         }}
         bets={match.Transaction}
+      />
+      <ModalChat
+        visible={chatVisible}
+        onClose={() => setChatVisible(false)}
+        refetch={refetch}
+        matchId={match.id}
+        messages={match.MatchMessage}
       />
       <Spacer size={hp("3%")} />
     </Card>
