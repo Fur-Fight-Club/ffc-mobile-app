@@ -8,6 +8,7 @@ import { WalletScreen } from "@screens/Settings/Wallet.screen";
 import { ProfilScreen } from "@screens/Settings/Profil.screen";
 import { PasswordScreen } from "@screens/Settings/Password.screen";
 import { NotificationScreen } from "@screens/Settings/Notification.screen";
+import { EmailScreen } from "@screens/Settings/Email.screen";
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,13 @@ export const SettingsNavigation: React.FunctionComponent<
       <Stack.Screen
         name={SettingsRoutes.PASSWORD}
         component={PasswordScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={SettingsRoutes.EMAIL}
+        component={EmailScreen}
         options={{
           headerShown: false,
         }}
