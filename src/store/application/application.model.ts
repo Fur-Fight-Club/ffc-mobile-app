@@ -56,6 +56,19 @@ export class UpdateRequest {
   password?: string;
 }
 
+export class UpdatePasswordRequest {
+  oldPassword: string;
+  password: string;
+}
+
+export type UpdatePasswordResponse = Promise<boolean>;
+
+export class UpdateEmailRequest {
+  email: string;
+}
+
+export type UpdateEmailResponse = Promise<boolean>;
+
 export class LoginResponse {
   access_token: string;
 }

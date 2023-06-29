@@ -3,7 +3,11 @@ import { Input } from "@components/ui/atoms/Input.component";
 import { Spacer } from "@components/ui/atoms/Spacer.component";
 import { SettingsRoutes } from "@navigation/navigation.model";
 import { useNavigation } from "@react-navigation/native";
-import { useUpdateUserPasswordMutation } from "@store/application/slice";
+import { applicationState } from "@store/application/selector";
+import {
+  useUpdateUserEmailMutation,
+  useUpdateUserPasswordMutation,
+} from "@store/application/slice";
 import { hp, wp } from "@utils/responsive.utils";
 import { useEffect, useState } from "react";
 import {
@@ -15,53 +19,27 @@ import {
 } from "react-native";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { Button, Colors, Text } from "react-native-ui-lib";
+import { useSelector } from "react-redux";
 
-interface PasswordScreenProps {}
+interface EmailScreenProps {}
 
-export const PasswordScreen: React.FunctionComponent<
-  PasswordScreenProps
-> = ({}) => {
+export const EmailScreen: React.FunctionComponent<EmailScreenProps> = ({}) => {
   const nav = useNavigation();
-  const [update, updateMutation] = useUpdateUserPasswordMutation();
-  const [password, setPassword] = useState("");
-  const [oldPassword, setOdlPassword] = useState("");
-  const [verifPassword, setVerifPassword] = useState("");
+  const [update, updateMutation] = useUpdateUserEmailMutation();
+  const [email, setEmail] = useState("");
+  const { user } = useSelector(applicationState);
 
-  const handleSubmitPassword = () => {
-    const strongPasswordRegex = new RegExp(
-      "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
-    );
-
-    if (!password || !oldPassword || !verifPassword) {
+  const handleSubmitProfil = () => {
+    if (!email) {
       Toast.show({
         type: "error",
-        text1: "✍️ Oups !",
-        text2: "Veuillez entrer tous les champs",
-      });
-      return;
-    } else if (!password || !verifPassword) {
-      Toast.show({
-        type: "error",
-        text1: "🔐 Oups !",
-        text2: "Veuillez entrer votre mot de passe",
-      });
-    } else if (password !== verifPassword) {
-      Toast.show({
-        type: "error",
-        text1: "🔐 Oups !",
-        text2: "Les mots de passe ne correspondent pas",
-      });
-      return;
-    } else if (!strongPasswordRegex.test(password)) {
-      Toast.show({
-        type: "error",
-        text1: "🔐 Oups !",
-        text2: "Veuillez saisir un mot de passe plus complèxe !",
+        text1: "✉️ Oups !",
+        text2: "Veuillez entrer votre adresse email",
       });
       return;
     }
 
-    update({ oldPassword, password });
+    update({ email });
   };
 
   useEffect(() => {
@@ -70,6 +48,7 @@ export const PasswordScreen: React.FunctionComponent<
       nav.navigate(SettingsRoutes.MENU);
     }
   }, [updateMutation.isSuccess]);
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <BackArrow onPress={() => nav.goBack()} />
@@ -77,33 +56,21 @@ export const PasswordScreen: React.FunctionComponent<
         style={styles.scrollview}
         contentContainerStyle={styles.scrollviewContainer}
       >
-        <Text style={styles.textTitle}>Modifier votre mot de passe</Text>
-        <Text style={styles.oldFullName}></Text>
+        <Text style={styles.textTitle}>Modifier mon adresse email</Text>
+        <Text style={styles.oldEmail}>{user.email}</Text>
         <View style={styles.card}>
           <Input
-            onChangeText={setOdlPassword}
-            value={oldPassword}
-            type="password"
-            placeholder="Ancien mot de passe"
-          />
-          <Input
-            onChangeText={setPassword}
-            value={password}
-            type="password"
-            placeholder="Nouveau mot de passe"
-          />
-          <Input
-            onChangeText={setVerifPassword}
-            value={verifPassword}
-            type="password"
-            placeholder="Confirmer le nouveau mot de passe"
+            onChangeText={setEmail}
+            value={email}
+            type="emailAddress"
+            placeholder="Nouvelle adresse email"
           />
           <Spacer size={hp("2%")} />
           <Button
-            label={"Modifier le mot de passe"}
+            label={"Modifier"}
             size={Button.sizes.large}
             backgroundColor={Colors.red30}
-            onPress={() => handleSubmitPassword()}
+            onPress={() => handleSubmitProfil()}
           />
         </View>
       </ScrollView>
@@ -138,7 +105,7 @@ const styles = StyleSheet.create({
     fontSize: hp("3%"),
     textTransform: "uppercase",
   },
-  oldFullName: {
+  oldEmail: {
     top: hp("2%"),
     fontSize: hp("2%"),
   },

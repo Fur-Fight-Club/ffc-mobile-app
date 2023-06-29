@@ -41,30 +41,35 @@ export const RegisterScreen: React.FunctionComponent<
         text1: "✍️ Oups !",
         text2: "Veuillez entrer votre nom complet",
       });
+      return;
     } else if (!email) {
       Toast.show({
         type: "error",
         text1: "✉️ Oups !",
         text2: "Veuillez entrer votre adresse email",
       });
+      return;
     } else if (!password || !passwordConfirmation) {
       Toast.show({
         type: "error",
         text1: "🔐 Oups !",
         text2: "Veuillez entrer votre mot de passe",
       });
+      return;
     } else if (password !== passwordConfirmation) {
       Toast.show({
         type: "error",
         text1: "🔐 Oups !",
         text2: "Les mots de passe ne correspondent pas",
       });
+      return;
     } else if (!strongPasswordRegex.test(password)) {
       Toast.show({
         type: "error",
         text1: "🔐 Oups !",
         text2: "Veuillez saisir un mot de passe plus complèxe !",
       });
+      return;
     }
 
     register({ firstname, lastname, email, password });

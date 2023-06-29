@@ -16,6 +16,7 @@ export enum SettingsRoutes {
   PROFIL = "Profile",
   WALLET = "Protefeuille",
   PASSWORD = "PasswordSettings",
+  EMAIL = "EmailSettings",
   NOTIFICATIONS = "Notifications",
   LOGOUT = "Logout",
 }
