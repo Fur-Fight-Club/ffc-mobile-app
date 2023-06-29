@@ -54,11 +54,6 @@ export const SetttingsMenuScreen: React.FunctionComponent<
           onPress={() => nav.navigate(SettingsRoutes.WALLET)}
         />
         <MenuList
-          children="Paramètres de notifications"
-          // @ts-ignore
-          onPress={() => nav.navigate(SettingsRoutes.NOTIFICATIONS)}
-        />
-        <MenuList
           children="Déconnexion"
           color="red"
           // @ts-ignore
