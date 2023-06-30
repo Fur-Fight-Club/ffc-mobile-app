@@ -65,6 +65,7 @@ export type UpdatePasswordResponse = Promise<boolean>;
 
 export class UpdateEmailRequest {
   email: string;
+  id: number;
 }
 
 export type UpdateEmailResponse = Promise<boolean>;

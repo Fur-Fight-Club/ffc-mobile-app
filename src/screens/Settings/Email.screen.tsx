@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { applicationState } from "@store/application/selector";
 import {
   useUpdateUserEmailMutation,
+  useUpdateUserMutation,
   useUpdateUserPasswordMutation,
 } from "@store/application/slice";
 import { hp, wp } from "@utils/responsive.utils";
@@ -25,7 +26,7 @@ interface EmailScreenProps {}
 
 export const EmailScreen: React.FunctionComponent<EmailScreenProps> = ({}) => {
   const nav = useNavigation();
-  const [update, updateMutation] = useUpdateUserEmailMutation();
+  const [update, updateMutation] = useUpdateUserMutation();
   const [email, setEmail] = useState("");
   const { user } = useSelector(applicationState);
 
@@ -39,7 +40,7 @@ export const EmailScreen: React.FunctionComponent<EmailScreenProps> = ({}) => {
       return;
     }
 
-    update({ email });
+    update({ email, id: user.id });
   };
 
   useEffect(() => {

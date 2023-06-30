@@ -40,7 +40,7 @@ export const ProfilScreen: React.FunctionComponent<
       });
     }
 
-    update({ firstname, lastname });
+    update({ firstname, lastname, id: user.id });
   };
 
   useEffect(() => {

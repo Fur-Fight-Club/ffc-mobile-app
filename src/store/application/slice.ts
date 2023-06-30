@@ -243,6 +243,8 @@ export const applicationApi = createApi({
           dispatch(setLoading(false));
         } catch (err) {
           const error = err as GenericApiError;
+          console.log(error.error.data);
+
           dispatch(setLoading(false));
           Toast.show({
             type: "error",
@@ -279,32 +281,28 @@ export const applicationApi = createApi({
       },
     }),
 
-
-        // update user email
-        UpdateUserEmail: builder.mutation<
-        UpdateEmailResponse,
-        UpdateEmailRequest
-      >({
-        query: (body) => ({
-          url: `${endpoint.updateEmail}`,
-          method: "PATCH",
-          body,
-        }),
-        async onQueryStarted(id, { dispatch, queryFulfilled }) {
-          dispatch(setLoading(true));
-          try {
-            dispatch(setLoading(false));
-          } catch (err) {
-            const error = err as GenericApiError;
-            dispatch(setLoading(false));
-            Toast.show({
-              type: "error",
-              text1: "🚨 Erreur !",
-              text2: "Une erreur est survenue, veuillez réessayer",
-            });
-          }
-        },
+    // update user email
+    UpdateUserEmail: builder.mutation<UpdateEmailResponse, UpdateEmailRequest>({
+      query: (body) => ({
+        url: `${endpoint.updateEmail}`,
+        method: "PATCH",
+        body,
       }),
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        dispatch(setLoading(true));
+        try {
+          dispatch(setLoading(false));
+        } catch (err) {
+          const error = err as GenericApiError;
+          dispatch(setLoading(false));
+          Toast.show({
+            type: "error",
+            text1: "🚨 Erreur !",
+            text2: "Une erreur est survenue, veuillez réessayer",
+          });
+        }
+      },
+    }),
   }),
 });
 
