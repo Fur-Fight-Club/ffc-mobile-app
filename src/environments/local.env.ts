@@ -1,3 +1,3 @@
 export const env = {
-  API_URL: "http://192.168.1.88:4000",
+  API_URL: "http://api.ffc.mistergooddeal.org",
 };
