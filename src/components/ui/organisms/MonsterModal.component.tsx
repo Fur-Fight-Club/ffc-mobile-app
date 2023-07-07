@@ -43,11 +43,11 @@ export const MonsterModal: React.FunctionComponent<MonsterModalProps> = ({
   monster,
 }) => {
   const [image, setImage] = React.useState<string>(
-    monster ? monster.picture : ""
+    monster ? monster?.picture : ""
   );
-  const [name, setName] = React.useState<string>(monster ? monster.name : "");
+  const [name, setName] = React.useState<string>(monster ? monster?.name : "");
   const [weight, setWeight] = React.useState<string>(
-    monster ? monster.weight.toString() : ""
+    monster ? monster?.weight.toString() : ""
   );
   const [type, setType] = React.useState<{
     label: string;
@@ -55,8 +55,8 @@ export const MonsterModal: React.FunctionComponent<MonsterModalProps> = ({
   }>(
     monster
       ? {
-          label: convertApiTypeToType(monster.monster_type),
-          value: monster.monster_type,
+          label: convertApiTypeToType(monster?.monster_type),
+          value: monster?.monster_type,
         }
       : { label: "", value: null }
   );
@@ -65,22 +65,22 @@ export const MonsterModal: React.FunctionComponent<MonsterModalProps> = ({
     value: WeightCategoryType | null;
   }>(
     monster
-      ? { label: monster.weight_category, value: monster.weight_category }
+      ? { label: monster?.weight_category, value: monster?.weight_category }
       : { label: null, value: null }
   );
 
   React.useEffect(() => {
     if (monster !== undefined) {
-      setImage(monster.picture);
-      setName(monster.name);
-      setWeight(monster.weight.toString());
+      setImage(monster?.picture);
+      setName(monster?.name);
+      setWeight(monster?.weight.toString());
       setType({
-        label: convertApiTypeToType(monster.monster_type),
-        value: monster.monster_type,
+        label: convertApiTypeToType(monster?.monster_type),
+        value: monster?.monster_type,
       });
       setWeightCategory({
-        label: monster.weight_category,
-        value: monster.weight_category,
+        label: monster?.weight_category,
+        value: monster?.weight_category,
       });
     }
   }, [monster]);
@@ -115,7 +115,7 @@ export const MonsterModal: React.FunctionComponent<MonsterModalProps> = ({
       });
     } else {
       onValidate({
-        id: monster ? monster.id : undefined,
+        id: monster ? monster?.id : undefined,
         name,
         monster_type: type.value,
         weight_category: weightCategory.value,

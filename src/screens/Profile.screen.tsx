@@ -157,7 +157,7 @@ export const ProfileScreen: React.FunctionComponent<
                 {monsters?.map((monster) => (
                   <MonsterCard
                     monster={monster}
-                    key={monster.id}
+                    key={monster?.id}
                     handleDeleteMonster={handleDeleteMonster}
                     handleUpdateMonster={handleUpdateMonster}
                   />

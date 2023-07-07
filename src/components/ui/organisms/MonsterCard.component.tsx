@@ -23,7 +23,7 @@ export const MonsterCard: React.FunctionComponent<MonsterCardProps> = ({
 }) => {
   return (
     <View
-      key={monster.id}
+      key={monster?.id}
       style={styles.monsterContainer}
       backgroundColor={Colors.grey80}
       flex
@@ -33,21 +33,21 @@ export const MonsterCard: React.FunctionComponent<MonsterCardProps> = ({
     >
       <Avatar
         source={{
-          uri: monster.picture,
+          uri: monster?.picture,
         }}
-        label={monster.name.charAt(0)}
+        label={monster?.name.charAt(0)}
         size={hp("10%")}
       />
 
-      <Text style={styles.monsterName}>{monster.name}</Text>
+      <Text style={styles.monsterName}>{monster?.name}</Text>
       <View row style={styles.monsterDataContainer}>
         <View row>
-          <Text style={styles.monsterMmr}>{monster.mmr}</Text>
+          <Text style={styles.monsterMmr}>{monster?.mmr}</Text>
           <Text>MMR</Text>
         </View>
         <View row>
           <Text style={styles.monsterMmr}>
-            {addDotEveryThreeDigits(monster.weight)}
+            {addDotEveryThreeDigits(monster?.weight)}
           </Text>
           <Text>KG</Text>
         </View>
@@ -57,13 +57,13 @@ export const MonsterCard: React.FunctionComponent<MonsterCardProps> = ({
         <View center>
           <Text style={styles.monsterHint}>Type</Text>
           <Text style={styles.monsterSecondData}>
-            {convertApiTypeToType(monster.monster_type)}
+            {convertApiTypeToType(monster?.monster_type)}
           </Text>
         </View>
         <View center>
           <Text style={styles.monsterHint}>Catégorie</Text>
           <Text style={styles.monsterSecondData}>
-            {monster.weight_category.replaceAll("_", " ")}
+            {monster?.weight_category.replaceAll("_", " ")}
           </Text>
         </View>
       </View>
@@ -79,7 +79,7 @@ export const MonsterCard: React.FunctionComponent<MonsterCardProps> = ({
           label={"Supprimer"}
           size={Button.sizes.large}
           backgroundColor={Colors.red10}
-          onPress={() => handleDeleteMonster(monster.id)}
+          onPress={() => handleDeleteMonster(monster?.id)}
         />
       </View>
     </View>

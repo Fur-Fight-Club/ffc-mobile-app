@@ -30,8 +30,8 @@ export const MonsterVersusCard: React.FunctionComponent<
 
   const handlePlaceBet = (monster: Monster) => {
     Alert.prompt(
-      `Parier sur ${monster.name}`,
-      `Combien de jetons voulez-vous parier sur ${monster.name} ?`,
+      `Parier sur ${monster?.name}`,
+      `Combien de jetons voulez-vous parier sur ${monster?.name} ?`,
       [
         {
           text: "Annuler",
@@ -42,7 +42,7 @@ export const MonsterVersusCard: React.FunctionComponent<
           onPress: (amount) => {
             placeBet({
               matchId: match.id,
-              monster: monster.id,
+              monster: monster?.id,
               amount: parseInt(amount),
             });
           },

@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "sdkVersion": "48.0.0",
     "scheme": "https",
-    "slug": "ffc.mistergooddeal.org",
+    "slug": "furyfightclub",
     "hostType": "domain",
     "orientation": "portrait",
     "platforms": [
@@ -13,7 +13,7 @@
       "web"
     ],
     "android": {
-      "package": "com.mistergooddeal.furfightclub",
+      "package": "com.mistergooddeal.furyfightclub",
       "googleServicesFile": "./google-services.json",
       "intentFilters": [
         {
@@ -25,13 +25,22 @@
               "pathPrefix": "/payments"
             }
           ],
-          "category": ["BROWSABLE", "DEFAULT"]
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
         }
+      ],
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA"
       ]
     },
     "ios": {
-      "bundleIdentifier": "com.mistergooddeal.furfightclub",
-      "associatedDomains": ["applinks:ffc.mistergooddeal.org"],
+      "bundleIdentifier": "com.mistergooddeal.furyfightclub",
+      "associatedDomains": [
+        "applinks:ffc.mistergooddeal.org"
+      ],
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
         "UIBackgroundModes": [
@@ -45,7 +54,7 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "$(PRODUCT_NAME) your photos to let you share them with your monster."
+          "photosPermission": "$(PRODUCT_NAME) your photos to let you share them with your monster?."
         }
       ],
       [
@@ -57,7 +66,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "c74a8dd0-9d49-4273-a9e7-b1911ce8861c"
+        "projectId": "a2a5e87e-d169-428d-942c-e815b069dd04"
       }
     }
   }

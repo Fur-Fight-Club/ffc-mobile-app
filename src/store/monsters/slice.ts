@@ -102,7 +102,7 @@ export const monstersApi = createApi({
       > & { id: number }
     >({
       query: (monster) => ({
-        url: endpoint.patch(monster.id),
+        url: endpoint.patch(monster?.id),
         method: "PATCH",
         body: monster,
       }),
